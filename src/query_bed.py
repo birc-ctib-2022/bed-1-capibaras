@@ -48,7 +48,7 @@ def main() -> None:
         coincidences = bed_file.get_chrom(chrom)
         if len(coincidences) > 0:  ## is our chromosome in the bed table? 
             for c in coincidences: ## check the range of each coincidence
-                if int(start) <= c[1] and c[2] >= int(end):
+                if int(start) <= c[1] and c[2] <= int(end):
                     print_line(c,args.outfile)
 
 
