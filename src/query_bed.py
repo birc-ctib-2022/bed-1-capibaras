@@ -27,8 +27,33 @@ def main() -> None:
     args = argparser.parse_args()
 
     # With all the options handled, we just need to do the real work
-    # FIXME: put your code here
+        
+
+    #read the file (in this case it's a bed and a query)
+    #mytab = Table() #to initialize the table
+    #for line in args.bed:
+    #    mytab.add_line(parse_line(line)) #add a line to the table
+    #print(mytab) 
+    #now we have a table with the bedfiles, which is the lines that we want to check if they're in the query
+
+    #now we read the query and 1 --> check whether the chr.query is inside bedfile
+    #                           2--> check for the lengths
+
+    bed_file = Table() ## process bed file (input)
+    for line in args.bed:
+        bed_file.add_line(parse_line(line))
+
+    for line in args.query: ## process the query and check if it exists in the input file
+        chrom, start, end = line.split() ## process the line of the query
+        coincidences = bed_file.get_chrom(chrom)
+        if len(coincidences) > 0:  ## is our chromosome in the bed table? 
+            for c in coincidences: ## check the range of each coincidence
+                if int(start) <= c[1] and c[2] >= int(end):
+                    print_line(c,args.outfile)
+
 
 
 if __name__ == '__main__':
     main()
+                                            #what the input asks for
+#python 3.10 | name of file you want to run | input.bed | input.query | output file

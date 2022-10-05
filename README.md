@@ -65,9 +65,10 @@ When you have implemented the tool, answer the questions below, commit it to Git
 ## Questions
 
 How does your method for extracting features work?
+We process the bed file storing the information in a BedLines table. When processing the query file, we retrieve from the table the lines that contain the same chromosome in the query. After that, we filter those lines if the range
 
 What is the complexity of the algorithm, as a function of the size of the two input files? When you answer this, you need to know that you can get the list of chromosomse from a `query.Table` in constant time, but it does, of course, take longer to run through all the lines in it.
 
 Did you, at any point, exploit that our features are on single nucleotides and not larger regions?
 
-If you did, what would it take to handle general regions?
+If you did, what would it take to handle general regions? (like GC islands?)

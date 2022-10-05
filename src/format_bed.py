@@ -29,6 +29,13 @@ def main() -> None:
 
     # With all the options handled, we just need to do the real work
     # FIXME: put your code here
+    #infile=args[0] #you put 0 because is the input file
+    #outfile=args[1] #you put 1 because it's the output file
+
+    #args.line is something you are going to give as an input
+    #you iterate through the lines in args.file 
+    for line in args.infile:
+        print_line(parse_line(line), args.outfile)
 
 
 if __name__ == '__main__':
