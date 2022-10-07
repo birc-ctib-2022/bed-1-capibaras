@@ -65,9 +65,13 @@ When you have implemented the tool, answer the questions below, commit it to Git
 ## Questions
 
 How does your method for extracting features work?
+We process the bed file storing the information in a BedLines table. When processing the query file, we retrieve from the table the lines that contain the same chromosome in the query. After that, we filter those lines if the range lies inside the range of the query and we return them in an output file.
 
-What is the complexity of the algorithm, as a function of the size of the two input files? When you answer this, you need to know that you can get the list of chromosomse from a `query.Table` in constant time, but it does, of course, take longer to run through all the lines in it.
+What is the complexity of the algorithm, as a function of the size of the two input files? When you answer this, you need to know that you can get the list of chromosomse from a `query.Table` in constant time, but it does, of course, take longer to run through all the lines in it. O(m + n^2), where "m" is the size of the input bedfile and "n" is the size of the query.
 
 Did you, at any point, exploit that our features are on single nucleotides and not larger regions?
+Yes we did, because with:
+    "if int(start) <= c[1] and c[2] = int(end):" we are not taking into acount that the input file could overlap some regions of the query, but not lie inside of it completely.
 
 If you did, what would it take to handle general regions?
+    "if int(start) <= c[1] or c[2] = int(end):" 
